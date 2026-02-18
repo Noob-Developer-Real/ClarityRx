@@ -125,7 +125,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 
-WHITENOISE_USE_FINDERS = False
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ["js", "css", "svg", "json"]
 
 STORAGES = {
