@@ -22,7 +22,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =False
 
-ALLOWED_HOSTS = ["clarityrx-mko4.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -120,12 +121,9 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
 STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
-
-WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ["js", "css", "svg", "json"]
+MEDIA_URL = "/media/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
     "default": {
@@ -135,6 +133,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
+
 
 
 # Default primary key field type
