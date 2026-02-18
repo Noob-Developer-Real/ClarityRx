@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ClarityRx | Smart Prescription System{% endblock %}
+{% block content %}
+<body class="hero-bg">
+<nav class="nav-container">
+    <div class="flex items-center gap-2 md:gap-3">
+        <div class="bg-blue-600 text-white w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl shadow-lg">
+            <i class="fas fa-hand-holding-medical fa-lg"></i>
+        </div>
+        <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">Clarity<span class="text-blue-600">Rx</span></span>
+    </div>
+
+    <div class="hidden md:flex gap-8 font-bold text-slate-600">
+        <a href="#how" class="hover:text-blue-600 transition">How it Works</a>
+        <a href="#impact" class="hover:text-blue-600 transition">Impact</a>
+        <a href="#tech" class="hover:text-blue-600 transition">Technology</a>
+    </div>
+
+    <div class="flex items-center gap-3 md:gap-6">
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="POST" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="hidden sm:block text-sm font-bold text-red-600 hover:text-red-800 transition">
+               Logout
+            </button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="hidden sm:block text-sm font-bold text-slate-600 hover:text-blue-600 transition">Login</a>
+        <a href="{% url 'signup' %}" class="btn-winner py-2 px-4 md:px-6 text-xs md:text-sm">Sign Up Free</a>
+    {% endif %}
+    
+    <button class="md:hidden text-slate-900 text-xl" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+</nav>
+
+<div id="mobileMenu" class="fixed inset-0 bg-white z-[2000] hidden flex-col p-8 space-y-6 text-center">
+    <button class="absolute top-6 right-8 text-2xl" onclick="toggleMenu()">&times;</button>
+    
+    {% if user.is_authenticated %}
+        <div class="mb-4">
+            <p class="text-slate-500 text-sm uppercase tracking-widest font-bold">Welcome,</p>
+            <p class="text-2xl font-extrabold text-slate-900">{{ user.first_name }}</p>
+        </div>
+    {% endif %}
+
+    <a href="#how" class="text-xl font-bold" onclick="toggleMenu()">How it Works</a>
+    <a href="#impact" class="text-xl font-bold" onclick="toggleMenu()">Impact</a>
+    <a href="#tech" class="text-xl font-bold" onclick="toggleMenu()">Technology</a>
+    
+    <hr class="border-slate-100">
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="POST" class="w-full">
+            {% csrf_token %}
+            <button type="submit" class="text-xl font-bold text-red-600 w-full py-2" onclick="toggleMenu()">
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="text-xl font-bold text-blue-600" onclick="toggleMenu()">Login</a>
+        <a href="{% url 'signup' %}" class="text-xl font-bold text-slate-900" onclick="toggleMenu()">Create Account</a>
+    {% endif %}
+</div>
+
+<header class="pt-12 md:pt-20 pb-10 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 bg-white border border-blue-100 px-4 py-2 rounded-full shadow-sm mb-6 float">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+            </span>
+            <span class="text-[10px] md:text-xs font-bold text-blue-700 uppercase tracking-widest">Bridging the Health Literacy Gap</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-7xl font-extrabold text-slate-900 mb-6 leading-tight">
+            Understand your <br><span class="text-gradient">Medicine</span> instantly.
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-500 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed">
+            We use AI to translate complex prescriptions into simple, visual, and life-saving instructions for patients and their families.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{% url "upload_prescription" %}" class="btn-winner text-base md:text-lg px-8 md:px-10 py-4 md:py-5">
+                <i class="fas fa-file-export"></i> Simplify My Rx
+            </a>
+            <a href="#" class="bg-white text-slate-700 px-8 md:px-10 py-4 md:py-5 rounded-full font-bold shadow-md hover:bg-slate-50 transition flex items-center justify-center gap-2">
+                <i class="fas fa-play-circle text-blue-600"></i> Watch Demo
+            </a>
+        </div>
+    </div>
+
+    <div class="comparison-container px-4">
+        <div class="box-old">
+            <span class="text-[10px] font-black text-slate-400 uppercase tracking-tighter text-left block">Doctor's Clinical Note</span>
+            <p class="text-base md:text-lg font-mono mt-2 text-slate-500 italic">"Atorvastatin 20mg PO QD HS. No GFJ."</p>
+        </div>
+        <div class="flex justify-center items-center text-blue-400 text-2xl py-2 md:py-0">
+            <i class="fas fa-chevron-right hidden md:block"></i>
+            <i class="fas fa-chevron-down md:hidden"></i>
+        </div>
+        <div class="box-new">
+            <span class="text-[10px] font-black text-blue-200 uppercase tracking-tighter text-left block">ClarityRx Simplified</span>
+            <p class="text-lg md:text-xl font-bold mt-2">"Take 1 Cholesterol pill every night at bedtime. Avoid grapefruit juice."</p>
+        </div>
+    </div>
+</header>
+
+<section id="how" class="py-16 md:py-24 px-6 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+        <div class="glass-card">
+            <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-100 text-blue-600 flex items-center justify-center rounded-2xl mb-6 text-xl">
+                <i class="fas fa-language"></i>
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold mb-4">Plain Language</h3>
+            <p class="text-slate-500 text-sm md:text-base">Converts Latin abbreviations (BID, PRN, QD) into everyday words like "Twice a day".</p>
+        </div>
+        <div class="glass-card">
+            <div class="w-12 h-12 md:w-14 md:h-14 bg-teal-100 text-teal-600 flex items-center justify-center rounded-2xl mb-6 text-xl">
+                <i class="fas fa-eye"></i>
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold mb-4">Visual Cues</h3>
+            <p class="text-slate-500 text-sm md:text-base">Color-coded warnings and icons for timing designed specifically for elderly users.</p>
+        </div>
+        <div class="glass-card">
+            <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-100 text-orange-600 flex items-center justify-center rounded-2xl mb-6 text-xl">
+                <i class="fas fa-shield-heart"></i>
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold mb-4">Safety First</h3>
+            <p class="text-slate-500 text-sm md:text-base">Detects precautions and diet restrictions that are often missed in complex medical notes.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 px-6 bg-blue-50/50">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div class="md:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6 leading-tight text-slate-900">Closing the <br><span class="text-blue-600">Communication Gap</span></h2>
+            <p class="text-base md:text-lg text-slate-600 mb-8">Most medical errors happen at the kitchen table. Doctors provide <strong>Clinical Data</strong>, but patients need <strong>Actionable Instructions.</strong></p>
+            
+            <div class="space-y-4">
+                <div class="flex gap-4 p-4 bg-white rounded-2xl shadow-sm border border-blue-100 items-start">
+                    <i class="fas fa-stethoscope text-xl text-blue-500 mt-1"></i>
+                    <div><h4 class="font-bold">Medical Input</h4><p class="text-xs md:text-sm text-slate-500">Raw clinical prescriptions.</p></div>
+                </div>
+                <div class="flex gap-4 p-4 bg-white rounded-2xl shadow-sm border border-teal-100 items-start">
+                    <i class="fas fa-microchip text-xl text-teal-500 mt-1"></i>
+                    <div><h4 class="font-bold">AI Processing</h4><p class="text-xs md:text-sm text-slate-500">Context-aware NLP translation.</p></div>
+                </div>
+                <div class="flex gap-4 p-4 bg-blue-600 rounded-2xl shadow-md text-white items-start">
+                    <i class="fas fa-user-check text-xl mt-1"></i>
+                    <div><h4 class="font-bold">Patient Clarity</h4><p class="text-xs md:text-sm text-blue-100">Simple, visual, actionable info.</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 glass-card p-0 overflow-hidden shadow-2xl border-none">
+             <div class="bg-slate-900 p-3 flex gap-2">
+                <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+             </div>
+             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" class="w-full opacity-90">
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-6 max-w-7xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-16 underline decoration-blue-500 decoration-4 underline-offset-8">Designed for Inclusivity</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-8 border-b-4 border-blue-500 bg-white rounded-t-3xl shadow-sm">
+            <i class="fas fa-person-cane text-3xl text-blue-500 mb-4"></i>
+            <h4 class="text-xl font-bold mb-2">The Elderly</h4>
+            <p class="text-slate-500 text-sm">Large fonts and color-coded icons eliminate bottle label confusion.</p>
+        </div>
+        <div class="p-8 border-b-4 border-teal-500 bg-white rounded-t-3xl shadow-sm">
+            <i class="fas fa-hands-holding-child text-3xl text-teal-500 mb-4"></i>
+            <h4 class="text-xl font-bold mb-2">Caregivers</h4>
+            <p class="text-slate-500 text-sm">Quickly manage family meds without clinical complexity.</p>
+        </div>
+        <div class="p-8 border-b-4 border-purple-500 bg-white rounded-t-3xl shadow-sm">
+            <i class="fas fa-earth-americas text-3xl text-purple-500 mb-4"></i>
+            <h4 class="text-xl font-bold mb-2">Local Languages</h4>
+            <p class="text-slate-500 text-sm">Instant translation into 10+ languages for total understanding.</p>
+        </div>
+    </div>
+</section>
+
+<section id="impact" class="bg-slate-900 rounded-[30px] md:rounded-[50px] mx-4 md:mx-10 py-16 md:py-20 px-6 text-white text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-12">Why this matters.</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div><h4 class="text-3xl md:text-5xl font-black text-blue-400 mb-2">60%</h4><p class="text-slate-400 text-xs">Misunderstand instructions</p></div>
+        <div><h4 class="text-3xl md:text-5xl font-black text-teal-400 mb-2">125k</h4><p class="text-slate-400 text-xs">Annual Deaths (USA)</p></div>
+        <div><h4 class="text-3xl md:text-5xl font-black text-orange-400 mb-2">$300B</h4><p class="text-slate-400 text-xs">Wasteful Costs</p></div>
+        <div><h4 class="text-3xl md:text-5xl font-black text-purple-400 mb-2">100%</h4><p class="text-slate-400 text-xs">Inclusive Design</p></div>
+    </div>
+</section>
+
+<section id="tech" class="py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+        <div class="md:w-1/2">
+            <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">The Technology</span>
+            <h2 class="text-4xl font-bold mt-2 mb-6">How it Works</h2>
+            <div class="space-y-8">
+                <div class="relative pl-12 border-l-2 border-slate-100 ml-4">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                    <h4 class="font-bold">OCR Extraction</h4>
+                    <p class="text-slate-500 text-sm">Scans handwritten or printed scripts with high accuracy.</p>
+                </div>
+                <div class="relative pl-12 border-l-2 border-slate-100 ml-4">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                    <h4 class="font-bold">Medical NLP</h4>
+                    <p class="text-slate-500 text-sm">The Django backend processes abbreviations via medical dictionary.</p>
+                </div>
+                <div class="relative pl-12 border-l-2 border-slate-100 ml-4">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                    <h4 class="font-bold">Interaction & Safety Scan</h4>
+                    <p class="text-slate-500 text-sm">The engine cross-references the medication against a database of known contraindications, flagging "Look-Alike, Sound-Alike" (LASA) drugs and dietary restrictions.</p>
+                </div>
+                <div class="relative pl-12 border-l-2 border-slate-100 ml-4">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                    <h4 class="font-bold">Visual Infographic Mapping</h4>
+                    <p class="text-slate-500 text-sm">Instead of just text, the system maps instructions to a library of universal medical icons (e.g., a sun icon for morning dosage), ensuring the instructions are accessible at a glance.</p>
+                </div>
+                <div class="relative pl-12 border-l-2 border-slate-100 ml-4">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">5</div>
+                    <h4 class="font-bold">Multilingual Localization</h4>
+                    <p class="text-slate-500 text-sm">The simplified instructions are passed through a translation layer that adapts the medical guidance into over 10+ local languages, maintaining the original clinical intent.</p>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 glass-card bg-slate-50 border-slate-200">
+            <img src="https://f5b623aa.delivery.rocketcdn.me/wp-content/uploads/elementor/thumbs/Blog_Optical-Character-Recognition-In-Healthcare-qmegovxeea50yufqmkr4pteax80jiwoj4oxasl9szk.jpg" class="rounded-xl mb-6">
+            <div class="flex justify-between items-center p-4 bg-white rounded-xl border border-blue-100">
+                <span class="text-xs font-bold text-slate-700 italic">"q.i.d"</span>
+                <i class="fas fa-arrow-right text-blue-500"></i>
+                <span class="text-xs font-bold text-blue-600">"4 times a day"</span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-24 px-6 bg-slate-50">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Precision Translation Matrix</h2>
+            <p class="text-slate-500 mt-4">How ClarityRx handles different medication categories.</p>
+        </div>
+        
+        <div class="overflow-x-auto glass-card p-4">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="py-4 px-4 text-xs font-black uppercase text-slate-400">Category</th>
+                        <th class="py-4 px-4 text-xs font-black uppercase text-slate-400">Clinical Input</th>
+                        <th class="py-4 px-4 text-xs font-black uppercase text-slate-400">ClarityRx Output</th>
+                        <th class="py-4 px-4 text-xs font-black uppercase text-slate-400 text-center">Safety Alert</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm">
+                    <tr class="border-b border-slate-50 hover:bg-blue-50/30 transition">
+                        <td class="py-4 px-4 font-bold text-blue-600">Chronic</td>
+                        <td class="py-4 px-4 font-mono">Lisinopril 10mg QD</td>
+                        <td class="py-4 px-4">Take 1 Blood Pressure pill daily.</td>
+                        <td class="py-4 px-4 text-center"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-bold">STABLE</span></td>
+                    </tr>
+                    <tr class="border-b border-slate-50 hover:bg-blue-50/30 transition">
+                        <td class="py-4 px-4 font-bold text-blue-600">Antibiotic</td>
+                        <td class="py-4 px-4 font-mono">Amoxicillin 500mg TID 7D</td>
+                        <td class="py-4 px-4 font-semibold text-orange-600">Finish the full 7-day course.</td>
+                        <td class="py-4 px-4 text-center"><span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-[10px] font-bold">ADHERENCE</span></td>
+                    </tr>
+                    <tr class="border-b border-slate-50 hover:bg-blue-50/30 transition">
+                        <td class="py-4 px-4 font-bold text-blue-600">Pain</td>
+                        <td class="py-4 px-4 font-mono">Acetaminophen PRN</td>
+                        <td class="py-4 px-4">Take ONLY when you feel pain.</td>
+                        <td class="py-4 px-4 text-center"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[10px] font-bold">DOSAGE</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-6 max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12">Questions</h2>
+    <div class="space-y-6">
+        <details class="group border-b border-slate-200 pb-6">
+            <summary class="flex justify-between items-center font-bold text-lg cursor-pointer list-none">
+                How is patient data kept secure?
+                <span class="text-blue-600 transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+            </summary>
+            <p class="text-slate-500 mt-4 text-sm leading-relaxed">We utilize Django's built-in security middleware and implement PII (Personally Identifiable Information) scrubbing before sending data to the NLP engine.</p>
+        </details>
+        
+        <details class="group border-b border-slate-200 pb-6">
+            <summary class="flex justify-between items-center font-bold text-lg cursor-pointer list-none">
+                How do you handle inaccurate OCR?
+                <span class="text-blue-600 transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+            </summary>
+            <p class="text-slate-500 mt-4 text-sm leading-relaxed">Our system includes a confidence-score threshold. If a scan is unclear, the UI prompts the user to "Review & Correct" before simplification occurs.</p>
+        </details>
+        <details class="group border-b border-slate-200 pb-6">
+            <summary class="flex justify-between items-center font-bold text-lg cursor-pointer list-none">
+                What happens if the AI makes a mistake in translation?
+                <span class="text-blue-600 transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+            </summary>
+            <p class="text-slate-500 mt-4 text-sm leading-relaxed">Our Safety is our priority. We implement a "Human-in-the-Loop" fallback where any low-confidence translations are flagged for pharmacist review. Additionally, we always provide the original clinical text alongside the simplified version for verification.</p>
+        </details>
+        <details class="group border-b border-slate-200 pb-6">
+            <summary class="flex justify-between items-center font-bold text-lg cursor-pointer list-none">
+                Does this system replace professional medical advice?
+                <span class="text-blue-600 transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+            </summary>
+            <p class="text-slate-500 mt-4 text-sm leading-relaxed">Not at all. ClarityRx is a supplemental health literacy tool. Our "Empathy-First" language engine is designed to reinforce, not replace, the specific instructions provided by a licensed healthcare professional.</p>
+        </details>
+        <details class="group border-b border-slate-200 pb-6">
+            <summary class="flex justify-between items-center font-bold text-lg cursor-pointer list-none">
+                How does the system handle different regional drug names?
+                <span class="text-blue-600 transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+            </summary>
+            <p class="text-slate-500 mt-4 text-sm leading-relaxed">Our Medical NLP Engine uses a semantic mapping layer. This allows us to cross-reference global generic names with local brand names to ensure accurate "Common Name" identification (e.g., Paracetamol vs. Acetaminophen).</p>
+        </details>
+    </div>
+</section>
+
+<footer class="bg-slate-900 text-white pt-20 pb-10 px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="bg-blue-600 text-white w-8 h-8 flex items-center justify-center rounded-lg shadow-lg">
+                        <i class="fas fa-hand-holding-medical"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">Clarity<span class="text-blue-400">Rx</span></span>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    Our mission is to eliminate medication errors by bridging the gap between clinical data and patient understanding through AI-driven simplification.
+                </p>
+                <div class="flex gap-4 text-slate-500">
+                    <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-twitter fa-lg"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-white uppercase text-xs tracking-widest">Platform</h4>
+                <ul class="space-y-4 text-sm text-slate-400">
+                    <li><a href="#how" class="hover:text-white transition">How it Works</a></li>
+                    <li><a href="#impact" class="hover:text-white transition">Social Impact</a></li>
+                    <li><a href="#tech" class="hover:text-white transition">Technology Stack</a></li>
+                    <li><a href="#" class="hover:text-white transition">Security Standards</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-white uppercase text-xs tracking-widest">Resources</h4>
+                <ul class="space-y-4 text-sm text-slate-400">
+                    <li><a href="#" class="hover:text-white transition">User Guide</a></li>
+                    <li><a href="#" class="hover:text-white transition">Pharmacy API</a></li>
+                    <li><a href="#" class="hover:text-white transition">Research Papers</a></li>
+                    <li><a href="#" class="hover:text-white transition">Accessibility Info</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-slate-800/50 p-4 rounded-3xl border border-slate-700/50">
+                <h4 class="font-bold mb-4 text-blue-400 uppercase text-xs tracking-widest">Note from Techie Saarthi</h4>
+                <p class="text-xs text-slate-300 italic mb-4 leading-relaxed">
+                    "This product is under development, so results may differ from expectations. We are continuously upgrading features, performance, and usability to deliver a stable, accurate, and consumer-friendly experience over time globally."
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">System Status: Stable</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8 border-t border-slate-800 pt-10">
+            <div class="text-center md:text-left">
+                <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                    <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-yellow-400 font-bold border border-slate-700 uppercase">Python</span>
+                    <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-teal-400 font-bold border border-slate-700 uppercase">Django 5.0</span>
+                    <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-purple-400 font-bold border border-slate-700 uppercase">OCR.space</span>
+                    <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-red-400 font-bold border border-slate-700 uppercase">HTML</span>
+                    <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-blue-400 font-bold border border-slate-700 uppercase">CSS</span>
+                    <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-pink-400 font-bold border border-slate-700 uppercase">Vanilla js</span>
+                </div>
+                <p class="text-slate-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
+                    &copy; 2026 TechieSaarthi | Professional Healthcare Informatics Solution
+                </p>
+            </div>
+            
+            <div class="text-xs text-slate-500 space-x-6">
+                <a href="#" class="hover:text-slate-300 transition">Privacy Policy</a>
+                <a href="#" class="hover:text-slate-300 transition">Compliance</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+    }
+</script>
+
+</body>
+{% endblock %}
