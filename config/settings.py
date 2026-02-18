@@ -27,7 +27,6 @@ ALLOWED_HOSTS = ["clarityrx-mko4.onrender.com"]
 
 # Application definition
 INSTALLED_APPS = [
-    "cloudinary_storage",
     "cloudinary",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -116,7 +115,6 @@ LOGOUT_REDIRECT_URL = 'home'
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
