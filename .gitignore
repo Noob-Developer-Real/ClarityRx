@@ -29,11 +29,6 @@ ENV/
 staticfiles/
 media/
 
-# ================================
-# Migrations (keep __init__.py)
-# ================================
-**/migrations/*
-!**/migrations/__init__.py
 
 # ================================
 # Build / Deployment
