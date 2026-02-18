@@ -3,18 +3,18 @@ from django.conf import settings
 
 OCR_SPACE_URL = "https://api.ocr.space/parse/image"
 
-def extract_text_from_image(image_path: str) -> str:
-    with open(image_path, "rb") as image_file:
-        response = requests.post(
-            OCR_SPACE_URL,
-            files={"file": image_file},
-            data={
-                "apikey": settings.OCR_SPACE_API_KEY,
-                "language": "eng",
-                "OCREngine": 2,
-            },
-            timeout=30,
-        )
+def extract_text_from_image(image_url: str) -> str:
+    response = requests.post(
+        OCR_SPACE_URL,
+        data={
+            "apikey": settings.OCR_SPACE_API_KEY,
+            "url": image_url,
+            "language": "eng",
+            "OCREngine": 2,
+        },
+        timeout=90,
+    )
+
     try:
         result = response.json()
     except ValueError:

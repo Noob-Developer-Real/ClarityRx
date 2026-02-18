@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Prescription Result | ClarityRx{% endblock %}
+
+{% block content %}
+<main class="min-h-screen flex items-center justify-center px-4 py-10">
+    <div class="glass-card w-full max-w-3xl">
+
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-extrabold text-slate-800">
+                Prescription Analysis
+            </h2>
+            <p class="text-slate-500 mt-1">
+                Simplified for easy understanding
+            </p>
+        </div>
+
+        <!-- Image Preview -->
+        <div class="flex justify-center mb-6">
+            <img 
+                src="{{ prescription.image.url }}" 
+                alt="Uploaded Prescription"
+                class="rounded-xl shadow-md max-h-64 object-contain"
+            >
+        </div>
+
+        <!-- Processing State -->
+        {% if not prescription.simplified_text %}
+            <div class="text-center py-10">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-blue-600 mb-4"></i>
+                <p class="text-lg font-semibold text-slate-700">
+                    Reading your prescription…
+                </p>
+                <p class="text-slate-500 mt-1">
+                    This usually takes a few seconds
+                </p>
+
+                <!-- Auto refresh -->
+                <meta http-equiv="refresh" content="3">
+            </div>
+
+        <!-- Result State -->
+        {% else %}
+            <div class="mt-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-3">
+                    Simplified Explanation
+                </h3>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 whitespace-pre-line text-slate-700 leading-relaxed">
+                    {{ prescription.simplified_text }}
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-3 text-sm text-blue-700">
+                    <strong>Note:</strong>
+                    This explanation is for understanding only and does not replace medical advice.
+                </div>
+
+                <!-- Action -->
+                <div class="mt-6 text-center">
+                    <a href="{% url 'upload_prescription' %}" class="btn-winner px-6 py-3 inline-flex">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Upload Another
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+</main>
+{% endblock %}

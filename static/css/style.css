@@ -8,6 +8,11 @@
     --warning-orange: #f97316;
     --accent-teal: #14b8a6;
 }
+main .flex-row,
+main .md\:flex-row {
+    flex-direction: column !important;
+}
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
 

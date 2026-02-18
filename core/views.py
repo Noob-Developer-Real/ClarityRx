@@ -14,7 +14,7 @@ def upload_prescription(request):
         )
         
         # 2. Process AI logic
-        raw_text = extract_text_from_image(prescription.image.path)
+        raw_text = extract_text_from_image(prescription.image.url)
         prescription.raw_text = raw_text
         prescription.simplified_text = simplify_prescription(raw_text)
         
