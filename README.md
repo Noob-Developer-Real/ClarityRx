@@ -131,13 +131,14 @@ These limitations are expected in free-tier environments and were part of the le
 </table>
 
 ---
+### 👤 Author 
+
 <table>
   <tr>
     <td>
-## 👤 Author
 
 Noob-Developer-Real  
-B.Tech CSE Student | Django | Backend Development
+B.Tech CSE Student | Django | Backend Development                                          
     </td>
   </tr>
 </table>
