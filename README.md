@@ -47,8 +47,8 @@ This workflow is designed to be **simple and easy to understand**, keeping learn
 - **Backend Framework:** Django (Python)
 - **Authentication:** Django built-in authentication system
 - **AI Services:**
-  - Third-party OCR API
-  - Groq LLaMA 8B (LLM-based translation)
+  - Third-party OCR API (OCR.Space)
+  - Groq llama-3.1-8b-instant (LLM-based translation)
 - **Frontend:** HTML / CSS (basic UI)
 - **Configuration:** Environment variables (`.env`)
 - **Deployment:** Render (free tier)
