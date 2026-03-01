@@ -100,27 +100,27 @@ These limitations are expected in free-tier environments and were part of the le
 ## 🖼️ Screenshots
 <p align="center">
   <img src="./images/home.png" alt="ClarityRx Home Page" width="45%" align="left">
-  <img src="./images/mobile-home.png" alt="ClarityRx MOB-home Page" width="45%" align="right">
+  <img src="./images/Mob-home.jpg" alt="ClarityRx MOB-home Page" width="45%" align="right">
 </p>
 <p align="center">
   <img src="./images/sign.png" alt="ClarityRx sign Page" width="45%" align="left">
-  <img src="./images/mobile-sign.png" alt="ClarityRx MOB-sign Page" width="45%" align="right">
+  <img src="./images/Mob-sign.jpg" alt="ClarityRx MOB-sign Page" width="45%" align="right">
 </p>
 <p align="center">
   <img src="./images/main.png" alt="ClarityRx main Page" width="45%" align="left">
-  <img src="./images/mobile-main.png" alt="ClarityRx MOB-main Page" width="45%" align="right">
+  <img src="./images/Mob-main.jpg" alt="ClarityRx MOB-main Page" width="45%" align="right">
 </p>
 <p align="center">
   <img src="./images/crop.png" alt="ClarityRx crop Page" width="45%" align="left">
-  <img src="./images/mobile-crop.png" alt="ClarityRx MOB-crop Page" width="45%" align="right">
+  <img src="./images/Mob-crop.jpg" alt="ClarityRx MOB-crop Page" width="45%" align="right">
 </p>
 <p align="center">
   <img src="./images/howcrop.png" alt="ClarityRx howcrop Page" width="45%" align="left">
-  <img src="./images/mobile-howcrop.png" alt="ClarityRx MOB-howcrop Page" width="45%" align="right">
+  <img src="./images/Mob-howcrop.jpg" alt="ClarityRx MOB-howcrop Page" width="45%" align="right">
 </p>
 <p align="center">
   <img src="./images/result.png" alt="ClarityRx result Page" width="45%" align="left">
-  <img src="./images/mobile-result.png" alt="ClarityRx MOB-result Page" width="45%" align="right">
+  <img src="./images/Mob-result.jpg" alt="ClarityRx MOB-result Page" width="45%" align="right">
 </p>
 
 ---
