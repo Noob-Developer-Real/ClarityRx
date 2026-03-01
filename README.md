@@ -56,6 +56,7 @@ This workflow is designed to be **simple and easy to understand**, keeping learn
 ---
 
 ## 📂 Project Structure
+```
 ClarityRx/
 │── authentication/ # Login & signup logic
 │── core/ # OCR & translation integration
@@ -63,6 +64,7 @@ ClarityRx/
 │── templates/ # HTML templates
 │── static/ # Static files
 │── manage.py
+```
 ---
 
 ## 🔐 Authentication Note
