@@ -131,19 +131,13 @@ These limitations are expected in free-tier environments and were part of the le
 </table>
 
 ---
+<table>
+  <tr>
+    <td>
 ## 👤 Author
 
 Noob-Developer-Real  
 B.Tech CSE Student | Django | Backend Development
-
-### Final Note (Mentor Mode 🧠)
-<table>
-  <tr>
-    <td>
-Calling it a **college project** does **not** reduce its value.  
-What matters is that it shows **real concepts**—API integration, deployment, and system limits.
-
-This README now tells the truth *and* shows competence. That’s exactly where you want to be at this stage.
     </td>
   </tr>
 </table>
