@@ -98,30 +98,37 @@ These limitations are expected in free-tier environments and were part of the le
 ---
 
 ## 🖼️ Screenshots
-<p align="center">
-  <img src="./images/home.png" alt="ClarityRx Home Page" width="45%" align="left">
-  <img src="./images/Mob-home.jpg" alt="ClarityRx MOB-home Page" width="45%" align="right">
-</p>
-<p align="center">
-  <img src="./images/sign.png" alt="ClarityRx sign Page" width="45%" align="left">
-  <img src="./images/Mob-sign.jpg" alt="ClarityRx MOB-sign Page" width="45%" align="right">
-</p>
-<p align="center">
-  <img src="./images/main.png" alt="ClarityRx main Page" width="45%" align="left">
-  <img src="./images/Mob-main.jpg" alt="ClarityRx MOB-main Page" width="45%" align="right">
-</p>
-<p align="center">
-  <img src="./images/crop.png" alt="ClarityRx crop Page" width="45%" align="left">
-  <img src="./images/Mob-crop.jpg" alt="ClarityRx MOB-crop Page" width="45%" align="right">
-</p>
-<p align="center">
-  <img src="./images/howcrop.png" alt="ClarityRx howcrop Page" width="45%" align="left">
-  <img src="./images/Mob-howcrop.jpg" alt="ClarityRx MOB-howcrop Page" width="45%" align="right">
-</p>
-<p align="center">
-  <img src="./images/result.png" alt="ClarityRx result Page" width="45%" align="left">
-  <img src="./images/Mob-result.jpg" alt="ClarityRx MOB-result Page" width="45%" align="right">
-</p>
+
+<table>
+  <tr>
+    <td align="center"><b>Desktop</b></td>
+    <td align="center"><b>Mobile</b></td>
+  </tr>
+  <tr>
+    <td><img src="./images/home.png" width="100%"></td>
+    <td><img src="./images/Mob-home.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/sign.png" width="100%"></td>
+    <td><img src="./images/Mob-sign.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/main.png" width="100%"></td>
+    <td><img src="./images/Mob-main.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/crop.png" width="100%"></td>
+    <td><img src="./images/Mob-crop.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/howcrop.png" width="100%"></td>
+    <td><img src="./images/Mob-howcrop.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/result.png" width="100%"></td>
+    <td><img src="./images/Mob-result.jpg" width="100%"></td>
+  </tr>
+</table>
 
 ---
 ## 👤 Author
